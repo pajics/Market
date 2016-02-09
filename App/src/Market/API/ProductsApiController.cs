@@ -4,7 +4,6 @@ using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
 using Market.Core;
-using Market.Models;
 
 namespace Market.Controllers
 {
@@ -12,9 +11,9 @@ namespace Market.Controllers
     [Route("api/Products")]
     public class ProductsApiController : Controller
     {
-        private ApplicationDbContext _context;
+        private DataContext _context;
 
-        public ProductsApiController(ApplicationDbContext context)
+        public ProductsApiController(DataContext context)
         {
             _context = context;
         }
@@ -139,7 +138,7 @@ namespace Market.Controllers
             base.Dispose(disposing);
         }
 
-        private bool ProductExists(int id)
+        private bool ProductExists(long id)
         {
             return _context.Products.Count(e => e.Id == id) > 0;
         }
