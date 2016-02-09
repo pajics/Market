@@ -4,6 +4,7 @@ using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
 using Market.Core;
+using Market.Core.Database;
 
 namespace Market.Core.Migrations
 {

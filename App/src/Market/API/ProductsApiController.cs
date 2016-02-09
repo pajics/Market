@@ -1,11 +1,12 @@
 using System.Collections.Generic;
 using System.Linq;
+using Market.Core.Database;
+using Market.Core.Products;
 using Microsoft.AspNet.Http;
 using Microsoft.AspNet.Mvc;
 using Microsoft.Data.Entity;
-using Market.Core;
 
-namespace Market.Controllers
+namespace Market.API
 {
     [Produces("application/json")]
     [Route("api/Products")]

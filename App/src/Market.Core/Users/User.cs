@@ -1,6 +1,6 @@
 using Microsoft.AspNet.Identity.EntityFramework;
 
-namespace Market.Core
+namespace Market.Core.Users
 {
     public class User : IdentityUser<int>
     {

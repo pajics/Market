@@ -11,6 +11,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Market.Services;
 using Market.Core;
+using Market.Core.Database;
 
 namespace Market
 {
@@ -44,7 +45,7 @@ namespace Market
                 .AddDbContext<DataContext>(options =>
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
-            //services.AddIdentity<ApplicationUser, IdentityRole>()
+            //services.AddIdentity<User, IdentityRole>()
             //    .AddEntityFrameworkStores<ApplicationDbContext>()
             //    .AddDefaultTokenProviders();
 
