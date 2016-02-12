@@ -41,5 +41,10 @@ namespace Market.Controllers
         {
             return View();
         }
+
+        public PartialViewResult FeaturedProducts()
+        {
+            return PartialView("_FeaturedProducts");
+        }
     }
 }

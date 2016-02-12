@@ -2,89 +2,41 @@
 @using Microsoft.AspNet.Http
 @using Microsoft.AspNet.Http.Authentication
 @model LoginViewModel
-@inject SignInManager<User> SignInManager
 
 @{
     ViewData["Title"] = "Log in";
 }
 
-<h2>@ViewData["Title"].</h2>
-<div class="row">
-    <div class="col-md-8">
-        <section>
-            <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Email" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Email" class="form-control" />
-                        <span asp-validation-for="Email" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Password" class="col-md-2 control-label"></label>
-                    <div class="col-md-10">
-                        <input asp-for="Password" class="form-control" />
-                        <span asp-validation-for="Password" class="text-danger"></span>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <div class="checkbox">
-                            <input asp-for="RememberMe" />
-                            <label asp-for="RememberMe"></label>
-                        </div>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <div class="col-md-offset-2 col-md-10">
-                        <button type="submit" class="btn btn-default">Log in</button>
-                    </div>
-                </div>
-                <p>
-                    <a asp-action="Register">Register as a new user?</a>
-                </p>
-                <p>
-                    <a asp-action="ForgotPassword">Forgot your password?</a>
-                </p>
-            </form>
-        </section>
-    </div>
-    <div class="col-md-4">
-        <section>
-            <h4>Use another service to log in.</h4>
-            <hr />
-            @{
-                var loginProviders = SignInManager.GetExternalAuthenticationSchemes().ToList();
-                if (loginProviders.Count == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form asp-controller="Account" asp-action="ExternalLogin" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
-                        <div>
-                            <p>
-                                @foreach (var provider in loginProviders)
-                                {
-                                    <button type="submit" class="btn btn-default" name="provider" value="@provider.AuthenticationScheme" title="Log in using your @provider.DisplayName account">@provider.AuthenticationScheme</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>
+<div class="breadcrumb-box">
+    <a href="#">Home</a>
+    <a href="#">Login Form</a>
 </div>
 
-@section Scripts {
-    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
-}
+<div class="information-blocks">
+    <div class="row">
+        <div class="col-sm-6 information-entry">
+            <div class="login-box">
+                <div class="article-container style-1">
+                    <h3>Registered Customers</h3>
+                    <p>Lorem ipsum dolor amet, conse adipiscing, eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+                </div>
+                <form>
+                    <label>Email Address</label>
+                    <input class="simple-field" type="text" placeholder="Enter Email Address" value="" />
+                    <label>Password</label>
+                    <input class="simple-field" type="password" placeholder="Enter Password" value="" />
+                    <div class="button style-10">Login Page<input type="submit" value="" /></div>
+                </form>
+            </div>
+        </div>
+        <div class="col-sm-6 information-entry">
+            <div class="login-box">
+                <div class="article-container style-1">
+                    <h3>New Customers</h3>
+                    <p>By creating an account with our store, you will be able to move through the checkout process faster, store multiple shipping addresses, view and track your orders in your account and more.</p>
+                </div>
+                <a class="button style-12">Register Account</a>
+            </div>
+        </div>
+    </div>
+</div>
