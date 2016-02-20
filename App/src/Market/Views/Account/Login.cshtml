@@ -20,12 +20,16 @@
                     <h3>Registered Customers</h3>
                     <p>Lorem ipsum dolor amet, conse adipiscing, eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
                 </div>
-                <form>
-                    <label>Email Address</label>
-                    <input class="simple-field" type="text" placeholder="Enter Email Address" value="" />
-                    <label>Password</label>
-                    <input class="simple-field" type="password" placeholder="Enter Password" value="" />
-                    <div class="button style-10">Login Page<input type="submit" value="" /></div>
+                <form asp-controller="Account" asp-action="Login" asp-route-returnurl="@ViewData["ReturnUrl"]" method="post" class="form-horizontal" role="form">
+                    <div asp-validation-summary="ValidationSummary.All" class="text-danger"></div>
+                    <label asp-for="Email">Email Address</label>
+                    <input asp-for="Email" class="simple-field" type="text" placeholder="Enter Email Address" value="" />
+                    @*<span asp-validation-for="Email" class="text-danger"></span>*@
+                    <label asp-for="Password">Password</label>
+                    <input asp-for="Password" class="simple-field" type="password" placeholder="Enter Password" value="" />
+                    @*<span asp-validation-for="Password" class="text-danger"></span>*@
+                    <div class="button style-10">Login Page<input type="submit" value=""/>
+                    </div>
                 </form>
             </div>
         </div>
