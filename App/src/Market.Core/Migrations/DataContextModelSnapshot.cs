@@ -3,7 +3,6 @@ using Microsoft.Data.Entity;
 using Microsoft.Data.Entity.Infrastructure;
 using Microsoft.Data.Entity.Metadata;
 using Microsoft.Data.Entity.Migrations;
-using Market.Core;
 using Market.Core.Database;
 
 namespace Market.Core.Migrations
@@ -17,23 +16,7 @@ namespace Market.Core.Migrations
                 .HasAnnotation("ProductVersion", "7.0.0-rc1-16348")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Market.Core.Product", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd();
-
-                    b.Property<string>("Description");
-
-                    b.Property<string>("ImagePath");
-
-                    b.Property<string>("Name");
-
-                    b.Property<decimal>("Price");
-
-                    b.HasKey("Id");
-                });
-
-            modelBuilder.Entity("Market.Core.Role", b =>
+            modelBuilder.Entity("Market.Core.Identity.Role", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -55,7 +38,25 @@ namespace Market.Core.Migrations
                     b.HasAnnotation("Relational:TableName", "AspNetRoles");
                 });
 
-            modelBuilder.Entity("Market.Core.User", b =>
+            modelBuilder.Entity("Market.Core.Products.Product", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Description");
+
+                    b.Property<string>("ImagePath");
+
+                    b.Property<string>("Name");
+
+                    b.Property<decimal>("Price");
+
+                    b.HasKey("Id");
+
+                    b.HasAnnotation("Relational:TableName", "Products");
+                });
+
+            modelBuilder.Entity("Market.Core.Users.User", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -101,7 +102,7 @@ namespace Market.Core.Migrations
                     b.HasIndex("NormalizedUserName")
                         .HasAnnotation("Relational:Name", "UserNameIndex");
 
-                    b.HasAnnotation("Relational:TableName", "AspNetUsers");
+                    b.HasAnnotation("Relational:TableName", "Users");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<int>", b =>
@@ -164,32 +165,32 @@ namespace Market.Core.Migrations
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Market.Core.Role")
+                    b.HasOne("Market.Core.Identity.Role")
                         .WithMany()
                         .HasForeignKey("RoleId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserClaim<int>", b =>
                 {
-                    b.HasOne("Market.Core.User")
+                    b.HasOne("Market.Core.Users.User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("Market.Core.User")
+                    b.HasOne("Market.Core.Users.User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNet.Identity.EntityFramework.IdentityUserRole<int>", b =>
                 {
-                    b.HasOne("Market.Core.Role")
+                    b.HasOne("Market.Core.Identity.Role")
                         .WithMany()
                         .HasForeignKey("RoleId");
 
-                    b.HasOne("Market.Core.User")
+                    b.HasOne("Market.Core.Users.User")
                         .WithMany()
                         .HasForeignKey("UserId");
                 });
