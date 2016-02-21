@@ -14,6 +14,7 @@ using Market.Core;
 using Market.Core.Database;
 using Market.Core.Identity;
 using Market.Core.Users;
+using Microsoft.AspNet.Authentication.Cookies;
 
 namespace Market
 {
@@ -47,7 +48,15 @@ namespace Market
                 .AddDbContext<DataContext>(options =>
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
 
-            services.AddIdentity<User, Role>()
+
+
+            services.AddIdentity<User, Role>(o =>
+                {
+                    o.Password.RequireDigit = false;
+                    o.Password.RequireNonLetterOrDigit = false;
+                    o.Password.RequiredLength = 6;
+                    o.Password.RequireUppercase = false;
+                })
                 .AddEntityFrameworkStores<DataContext, int>()
                 .AddDefaultTokenProviders();
 
@@ -91,7 +100,7 @@ namespace Market
 
             app.UseStaticFiles();
 
-            //app.UseIdentity();
+            app.UseIdentity();
 
             // To configure external authentication please see http://go.microsoft.com/fwlink/?LinkID=532715
 
