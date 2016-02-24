@@ -15,11 +15,14 @@ using Market.Core.Database;
 using Market.Core.Identity;
 using Market.Core.Users;
 using Microsoft.AspNet.Authentication.Cookies;
+using Swashbuckle.SwaggerGen;
 
 namespace Market
 {
     public class Startup
     {
+        private string pathToDoc = @"D:\Projects\Market\App\artifacts\bin\Market\Debug\dnx451\Market.xml";
+
         public Startup(IHostingEnvironment env)
         {
             // Set up configuration sources.
@@ -61,6 +64,28 @@ namespace Market
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+
+            services.AddSwaggerGen();
+
+            //var pathToDoc = Environment.CurrentDirectory + "Market.xml";
+            services.ConfigureSwaggerDocument(options =>
+            {
+                options.SingleApiVersion(new Info
+                {
+                    Version = "v1",
+                    Title = "Market API",
+                    Description = "A simple api to search products",
+                    TermsOfService = "None"
+                });
+                options.OperationFilter(new Swashbuckle.SwaggerGen.XmlComments.ApplyXmlActionComments(pathToDoc));
+            });
+
+            services.ConfigureSwaggerSchema(options =>
+            {
+                options.DescribeAllEnumsAsStrings = true;
+                options.ModelFilter(new Swashbuckle.SwaggerGen.XmlComments.ApplyXmlTypeComments(pathToDoc));
+            });
+            
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
@@ -110,6 +135,9 @@ namespace Market
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            app.UseSwaggerGen();
+            app.UseSwaggerUi();
         }
 
         // Entry point for the application.

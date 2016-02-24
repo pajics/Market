@@ -8,6 +8,9 @@ using Microsoft.Data.Entity;
 
 namespace Market.API
 {
+    /// <summary>
+    /// Products controller
+    /// </summary>
     [Produces("application/json")]
     [Route("api/Products")]
     public class ProductsApiController : Controller
@@ -26,7 +29,11 @@ namespace Market.API
             return _context.Products;
         }
 
-        // GET: api/ProductsApi/5
+        /// <summary>
+        /// GET: api/ProductsApi/5
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         [HttpGet("{id}", Name = "GetProduct")]
         public IActionResult GetProduct([FromRoute] int id)
         {
