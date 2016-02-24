@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Builder;
@@ -21,7 +22,6 @@ namespace Market
 {
     public class Startup
     {
-        private string pathToDoc = @"D:\Projects\Market\App\artifacts\bin\Market\Debug\dnx451\Market.xml";
 
         public Startup(IHostingEnvironment env)
         {
@@ -67,7 +67,10 @@ namespace Market
 
             services.AddSwaggerGen();
 
-            //var pathToDoc = Environment.CurrentDirectory + "Market.xml";
+            var path = Configuration["DNX_APPBASE"];
+            path = path.Remove(path.LastIndexOf(@"\"));
+            path = path.Remove(path.LastIndexOf(@"\"));
+            var pathToDoc = string.Format(@"{0}\artifacts\bin\Market\Debug\dnx451\Market.xml", path);
             services.ConfigureSwaggerDocument(options =>
             {
                 options.SingleApiVersion(new Info
