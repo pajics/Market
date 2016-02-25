@@ -15,6 +15,7 @@ using Market.Core.Database;
 using Market.Core.Identity;
 using Market.Core.Users;
 using Microsoft.AspNet.Authentication.Cookies;
+using Market.Infrastructure.Localization;
 
 namespace Market
 {
@@ -47,9 +48,8 @@ namespace Market
                 .AddSqlServer()
                 .AddDbContext<DataContext>(options =>
                     options.UseSqlServer(Configuration["Data:DefaultConnection:ConnectionString"]));
-
-
-
+            
+            //add asp.net identity
             services.AddIdentity<User, Role>(o =>
                 {
                     o.Password.RequireDigit = false;
@@ -60,11 +60,11 @@ namespace Market
                 .AddEntityFrameworkStores<DataContext, int>()
                 .AddDefaultTokenProviders();
 
-            services.AddMvc();
+            //localize routes
+            var localizedRoutes = GetLocalizedURLs();
+            services.AddMvc(o => o.AddLocalizedRoutes(localizedRoutes));
 
-            // Add application services.
-            services.AddTransient<IEmailSender, AuthMessageSender>();
-            services.AddTransient<ISmsSender, AuthMessageSender>();
+            RegisterServices(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -114,5 +114,39 @@ namespace Market
 
         // Entry point for the application.
         public static void Main(string[] args) => WebApplication.Run<Startup>(args);
+
+        /// <summary>
+        /// Get localized URLs for actions
+        /// </summary>
+        /// <returns>Localized URLs</returns>
+        private Dictionary<string, LocalizedRouteInformation[]> GetLocalizedURLs()
+        {
+            return new Dictionary<string, LocalizedRouteInformation[]>
+            {
+                {
+                "login", new[]
+                    {
+                        new LocalizedRouteInformation("sr", "prijava"),
+                    }
+                },
+                //{
+                //    "orderById", new[]
+                //    {
+                //        new LocalizedRouteInformation("sr", "porudzbina/{id:int}"),
+                //    }
+                //}
+            };
+        }
+
+        /// <summary>
+        /// Add application services
+        /// </summary>
+        /// <param name="services"></param>
+        private void RegisterServices(IServiceCollection services)
+        {
+            services.AddTransient<IEmailSender, AuthMessageSender>();
+            services.AddTransient<ISmsSender, AuthMessageSender>();
+
+        }
     }
 }

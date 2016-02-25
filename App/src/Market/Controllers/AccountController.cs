@@ -12,6 +12,9 @@ using Microsoft.Data.Entity;
 using Microsoft.Extensions.Logging;
 using Market.Services;
 using Market.ViewModels.Account;
+using Market.Infrastructure.Localization;
+using System.Threading;
+using System.Globalization;
 
 namespace Market.Controllers
 {
@@ -40,10 +43,13 @@ namespace Market.Controllers
 
         //
         // GET: /Account/Login
+        [LocalizedRoute("login", Name = "login")]
         [HttpGet]
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
         {
+            //var x = CultureInfo.CurrentCulture;
+            //var y = Thread.CurrentThread;
             ViewData["ReturnUrl"] = returnUrl;
             return View();
         }
