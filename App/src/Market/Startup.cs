@@ -64,7 +64,9 @@ namespace Market
 
             //localize routes
             var localizedRoutes = GetLocalizedURLs();
-            services.AddMvc(o => o.AddLocalizedRoutes(localizedRoutes));
+            services.AddMvc(o => o.AddLocalizedRoutes(localizedRoutes))
+                .AddViewLocalization(options => options.ResourcesPath = "Resources")
+                .AddDataAnnotationsLocalization();
 
             services.AddSwaggerGen();
 
