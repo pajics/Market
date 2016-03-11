@@ -120,4 +120,16 @@
   <data name="Loader" xml:space="preserve">
     <value>ucitava se...</value>
   </data>
+  <data name="WorkingHours_Header" xml:space="preserve">
+    <value>Radno vreme</value>
+  </data>
+  <data name="WorkingHours_Saturday" xml:space="preserve">
+    <value>Subota:</value>
+  </data>
+  <data name="WorkingHours_Sunday" xml:space="preserve">
+    <value>Nedelja:</value>
+  </data>
+  <data name="WorkingHours_Week" xml:space="preserve">
+    <value>Radna nedelja:</value>
+  </data>
 </root>

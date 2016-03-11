@@ -120,4 +120,16 @@
   <data name="Loader" xml:space="preserve">
     <value>loading...</value>
   </data>
+  <data name="WorkingHours_Header" xml:space="preserve">
+    <value>Company working hours</value>
+  </data>
+  <data name="WorkingHours_Saturday" xml:space="preserve">
+    <value>Saturday:</value>
+  </data>
+  <data name="WorkingHours_Sunday" xml:space="preserve">
+    <value>Sunday:</value>
+  </data>
+  <data name="WorkingHours_Week" xml:space="preserve">
+    <value>Monday-Friday:</value>
+  </data>
 </root>

@@ -67,5 +67,41 @@ namespace Market.Resources {
                 return ResourceManager.GetString("Loader", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Company working hours.
+        /// </summary>
+        internal static string WorkingHours_Header {
+            get {
+                return ResourceManager.GetString("WorkingHours_Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Saturday:.
+        /// </summary>
+        internal static string WorkingHours_Saturday {
+            get {
+                return ResourceManager.GetString("WorkingHours_Saturday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Sunday:.
+        /// </summary>
+        internal static string WorkingHours_Sunday {
+            get {
+                return ResourceManager.GetString("WorkingHours_Sunday", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///    Looks up a localized string similar to Monday-Friday:.
+        /// </summary>
+        internal static string WorkingHours_Week {
+            get {
+                return ResourceManager.GetString("WorkingHours_Week", resourceCulture);
+            }
+        }
     }
 }

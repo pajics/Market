@@ -14,7 +14,7 @@ using Market.ViewModels.Manage;
 namespace Market.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private readonly UserManager<User> _userManager;
         private readonly SignInManager<User> _signInManager;
