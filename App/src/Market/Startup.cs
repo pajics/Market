@@ -14,6 +14,7 @@ using Market.Services;
 using Market.Core;
 using Market.Core.Database;
 using Market.Core.Identity;
+using Market.Core.Products;
 using Market.Core.Users;
 using Microsoft.AspNet.Authentication.Cookies;
 using Market.Infrastructure.Localization;
@@ -179,7 +180,7 @@ namespace Market
         {
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-
+            services.AddScoped<IProductService, ProductService>();//todo: auto bind
         }
     }
 }
