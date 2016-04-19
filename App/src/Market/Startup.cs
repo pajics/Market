@@ -18,6 +18,8 @@ using Market.Core.Products;
 using Market.Core.Users;
 using Microsoft.AspNet.Authentication.Cookies;
 using Market.Infrastructure.Localization;
+using Market.Resources;
+using Microsoft.Extensions.Localization;
 using Swashbuckle.SwaggerGen;
 
 namespace Market
@@ -69,29 +71,29 @@ namespace Market
                 .AddViewLocalization(options => options.ResourcesPath = "Resources")
                 .AddDataAnnotationsLocalization();
 
-            services.AddSwaggerGen();
+            //services.AddSwaggerGen();
 
-            var path = Configuration["DNX_APPBASE"];
-            path = path.Remove(path.LastIndexOf(@"\"));
-            path = path.Remove(path.LastIndexOf(@"\"));
-            var pathToDoc = string.Format(@"{0}\artifacts\bin\Market\Debug\dnx451\Market.xml", path);
-            services.ConfigureSwaggerDocument(options =>
-            {
-                options.SingleApiVersion(new Info
-                {
-                    Version = "v1",
-                    Title = "Market API",
-                    Description = "A simple api to search products",
-                    TermsOfService = "None"
-                });
-                options.OperationFilter(new Swashbuckle.SwaggerGen.XmlComments.ApplyXmlActionComments(pathToDoc));
-            });
+            //var path = Configuration["DNX_APPBASE"];
+            //path = path.Remove(path.LastIndexOf(@"\"));
+            //path = path.Remove(path.LastIndexOf(@"\"));
+            //var pathToDoc = string.Format(@"{0}\artifacts\bin\Market\Debug\dnx451\Market.xml", path);
+            //services.ConfigureSwaggerDocument(options =>
+            //{
+            //    options.SingleApiVersion(new Info
+            //    {
+            //        Version = "v1",
+            //        Title = "Market API",
+            //        Description = "A simple api to search products",
+            //        TermsOfService = "None"
+            //    });
+            //    options.OperationFilter(new Swashbuckle.SwaggerGen.XmlComments.ApplyXmlActionComments(pathToDoc));
+            //});
 
-            services.ConfigureSwaggerSchema(options =>
-            {
-                options.DescribeAllEnumsAsStrings = true;
-                options.ModelFilter(new Swashbuckle.SwaggerGen.XmlComments.ApplyXmlTypeComments(pathToDoc));
-            });
+            //services.ConfigureSwaggerSchema(options =>
+            //{
+            //    options.DescribeAllEnumsAsStrings = true;
+            //    options.ModelFilter(new Swashbuckle.SwaggerGen.XmlComments.ApplyXmlTypeComments(pathToDoc));
+            //});
             
 
             // Add application services.
@@ -142,8 +144,8 @@ namespace Market
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            app.UseSwaggerGen();
-            app.UseSwaggerUi();
+            //app.UseSwaggerGen();
+            //app.UseSwaggerUi();
         }
 
         // Entry point for the application.
@@ -180,7 +182,8 @@ namespace Market
         {
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
-            services.AddScoped<IProductService, ProductService>();//todo: auto bind
+            //services.AddScoped<IProductService, ProductService>();//todo: auto bind
+            services.AddSingleton<IStringLocalizerFactory, ResxStringLocalizerFactory>();
         }
     }
 }
